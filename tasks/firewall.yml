@@ -1,6 +1,6 @@
 ---
-- name: firewall rules for postgres, patroni and etcd
-  command: echo "net.ipv4.ip_nonlocal_bind = 1" >> /etc/sysctl.conf; echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf; sysctl -p
+#- name: firewall rules for postgres, patroni and etcd
+#  command: echo "net.ipv4.ip_nonlocal_bind = 1" >> /etc/sysctl.conf; echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf; sysctl -p
 
 - name: udp etcd connection port for etcd
   firewalld:
@@ -50,5 +50,7 @@
     zone: public
     state: enabled
 
-- name: reload firewalld
-  command: firewall-cmd --reload
+- name: reload service firewalld
+  systemd:
+    name: firewalld
+    state: reloaded

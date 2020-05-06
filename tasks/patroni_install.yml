@@ -5,5 +5,5 @@
      - patroni[etcd]
    executable: /usr/bin/pip3
 
-- name: enable watchdog
-  command: modprobe softdog
+#- name: enable watchdog
+#  command: modprobe softdog

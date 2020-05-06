@@ -5,7 +5,9 @@
     state: latest
 
 - name: install epel repo
-  command: yum install epel-release -y
+  yum:
+   name: epel-release
+   state: present
 
 - name: install required packages
   yum:
@@ -13,8 +15,13 @@
    state: present
 #  notify: start firewalld
 
-- name: start firewall
-  command: systemctl start firewalld
+- name: start service firewalld
+  systemd:
+    state: started
+    name: firewalld
 
-- name: enable firewall
-  command: systemctl enable firewalld
+- name: enable service firewalld
+  systemd:
+    name: firewalld
+    enabled: yes
+    masked: no

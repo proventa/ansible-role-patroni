@@ -5,10 +5,7 @@
     owner: "{{ pg_user }}"
     group: "{{ pg_user }}"
     state: directory
-    mode: 700
-
-- name: set mode for patroni data
-  command: chmod 700 /data
+    mode: 0700
 
 - name: patroni log directory
   file:
@@ -30,10 +27,7 @@
     owner: "{{ pg_user }}"
     group: "{{ pg_user }}"
     state: directory
-    mode: 700
-
-- name: set mode for patroni conf
-  command: chmod 700 "{{ patroni_home }}"
+    mode: 0700
 
 - name: create patroni YAML
   copy:

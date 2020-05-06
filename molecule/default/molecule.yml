@@ -23,3 +23,7 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
 scenario:
   name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

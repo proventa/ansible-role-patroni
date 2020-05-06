@@ -1,0 +1,20 @@
+---
+- name: upgrade all packages
+  yum:
+    name: "*"
+    state: latest
+
+- name: install epel repo
+  command: yum install epel-release -y
+
+- name: install required packages
+  yum:
+   name: "{{ os_python_packages }}"
+   state: present
+#  notify: start firewalld
+
+- name: start firewall
+  command: systemctl start firewalld
+
+- name: enable firewall
+  command: systemctl enable firewalld

@@ -1,0 +1,24 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    pg_databases:
+      - name: example
+    pg_users:
+      - name: jdoe
+
+  pre_tasks:
+    - name: Set custom variables for old CentOS 6 PostgreSQL install
+      set_fact:
+        pg_hba_entries: []
+        pg_postgresql_conf_params:
+          - name: unix_socket_directory
+            value: '{{ pg_unix_socket_directories[0] }}'
+      when:
+        - ansible_os_family == 'RedHat'
+        - ansible_distribution_version.split('.')[0] == '6'
+
+  roles:
+    - role: yanehi.patroni

@@ -1,0 +1,9 @@
+- name: install patroni and etcd
+  pip:
+   name:
+     - patroni
+     - patroni[etcd]
+   executable: /usr/bin/pip3
+
+- name: enable watchdog
+  command: modprobe softdog

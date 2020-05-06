@@ -1,0 +1,5 @@
+- name: required patroni packages
+  pip:
+   name: "{{ patroni_python_packages }}"
+   state: present
+   executable: /usr/bin/pip3 

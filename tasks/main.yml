@@ -1,0 +1,14 @@
+- name: Prepare OS
+  block:
+    - import_tasks: update_os.yml
+    - import_tasks: firewall.yml
+
+- name: Add Postgres binaries and Python packages
+  block:
+    - import_tasks: python_packages.yml
+    - import_tasks: create_postgres_user.yml
+
+- name: Install Patroni
+  block:
+    - import_tasks: patroni_install.yml
+    - import_tasks: patroni_directories.yml

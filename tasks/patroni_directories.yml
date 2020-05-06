@@ -1,0 +1,48 @@
+---
+- name: patroni data directory
+  file:
+    path: "{{ patroni_data_dir }}"
+    owner: "{{ pg_user }}"
+    group: "{{ pg_user }}"
+    state: directory
+    mode: 700
+
+- name: set mode for patroni data
+  command: chmod 700 /data
+
+- name: patroni log directory
+  file:
+    path: "{{ patroni_log_dir }}/"
+    owner: "{{ pg_user }}"
+    group: "{{ pg_user }}"
+    state: directory
+
+- name: postgres owner bin directory
+  file:
+    path: "{{ pg_bin_path }}"
+    recurse: yes
+    owner: "{{ pg_user }}"
+    group: "{{ pg_user }}"
+
+- name: patroni conf directory
+  file:
+    path: "{{ patroni_home }}"
+    owner: "{{ pg_user }}"
+    group: "{{ pg_user }}"
+    state: directory
+    mode: 700
+
+- name: set mode for patroni conf
+  command: chmod 700 "{{ patroni_home }}"
+
+- name: create patroni YAML
+  copy:
+    src: ./patroni.yml
+    dest: "{{ patroni_home }}/patroni.yml"
+    owner: "{{ pg_user }}"
+    group: "{{ pg_user }}"
+
+- name: create patroni service
+  copy:
+    src: ./patroni.service
+    dest: /etc/systemd/system/patroni.service

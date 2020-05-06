@@ -6,13 +6,13 @@
 
 - name: install epel repo
   yum:
-   name: epel-release
-   state: present
+    name: epel-release
+    state: present
 
 - name: install required packages
   yum:
-   name: "{{ os_python_packages }}"
-   state: present
+    name: "{{ os_python_packages }}"
+    state: present
 #  notify: start firewalld
 
 - name: start service firewalld
@@ -25,3 +25,4 @@
     name: firewalld
     enabled: yes
     masked: no
+    

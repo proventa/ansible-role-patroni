@@ -1,3 +1,4 @@
+---
 scope: postgres-ha
 namespace: /patroni-postgres/
 name: pg-instance0
@@ -123,12 +124,12 @@ watchdog:
   safety_margin: 5
 
 tags:
-    nofailover: false
-    noloadbalance: false
-    clonefrom: false
-    nosync: false
+  nofailover: false
+  noloadbalance: false
+  clonefrom: false
+  nosync: false
 
 log:
-   dir: /var/log/pgsql/12
-   level: INFO
-   file_num: 3
+  dir: /var/log/pgsql/12
+  level: INFO
+  file_num: 3

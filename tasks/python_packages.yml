@@ -1,3 +1,4 @@
+---
 - name: required patroni packages
   pip:
    name: "{{ patroni_python_packages }}"

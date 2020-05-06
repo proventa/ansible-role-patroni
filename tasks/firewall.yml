@@ -1,7 +1,4 @@
 ---
-#- name: firewall rules for postgres, patroni and etcd
-#  command: echo "net.ipv4.ip_nonlocal_bind = 1" >> /etc/sysctl.conf; echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf; sysctl -p
-
 - name: udp etcd connection port for etcd
   firewalld:
     port: "{{ etcd_port }}/udp"
@@ -54,3 +51,4 @@
   systemd:
     name: firewalld
     state: reloaded
+    

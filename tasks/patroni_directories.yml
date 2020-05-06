@@ -40,3 +40,4 @@
   copy:
     src: ./patroni.service
     dest: /etc/systemd/system/patroni.service
+    

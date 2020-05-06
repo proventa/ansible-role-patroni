@@ -1,3 +1,4 @@
+---
 - name: Prepare OS
   block:
     - import_tasks: update_os.yml
@@ -12,3 +13,4 @@
   block:
     - import_tasks: patroni_install.yml
     - import_tasks: patroni_directories.yml
+    

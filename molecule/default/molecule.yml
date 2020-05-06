@@ -5,22 +5,20 @@ driver:
   name: docker
 lint:
   name: yamllint
-  options:
-    config-file: molecule/default/yaml-lint.yml
 platforms:
-  - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: centos7
+    image: milcom/centos7-systemd
     privileged: true
-    pre_build_image: false
+  - name: ubuntu18
+    image: solita/ubuntu-systemd
+    command: /sbin/init
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
 scenario:
   name: default
 verifier:

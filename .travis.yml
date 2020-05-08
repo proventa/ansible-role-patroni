@@ -27,8 +27,6 @@ script:
   - python get-pip.py
   - python3 get-pip.py
   - sudo cp /home/travis/virtualenv/python3.6.7/bin/pip3 /usr/bin/pip3
-  - /usr/bin/pip3 --version
-  - /usr/bin/pip --version
   - pip --version
   - pip3 --version
   - molecule test

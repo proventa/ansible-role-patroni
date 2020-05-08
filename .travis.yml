@@ -12,9 +12,13 @@ install:
   # Install test dependencies.
   - pip3 install --upgrade pip
   - pip3 install molecule yamllint ansible-lint docker
+  - which pip
+  - which pip3
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
+  - which pip
+  - which pip3
   - pip install -U pip==20.1
   - pip install --upgrade pip==20.1
   - cd ../
@@ -23,6 +27,8 @@ before_script:
 
 script:
   # Run tests.
+  - which pip
+  - which pip3
   - molecule test
 
 notifications:

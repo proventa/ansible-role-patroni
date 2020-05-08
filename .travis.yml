@@ -10,10 +10,7 @@ env:
 
 install:
   # Install test dependencies.
-  - pip install -U pip
   - pip3 install molecule yamllint ansible-lint docker
-  - pip install -r requirements.txt
-  - pip install --upgrade pip
   
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
@@ -28,9 +25,6 @@ before_script:
 
 script:
   # Run tests.
-  - pip install -U pip
-  - pip install --upgrade pip
-  - python -m site
   - pip --version
   - molecule test
 

@@ -4,8 +4,8 @@ services: docker
 
 virtualenv:
   system_site_packages: true
+  
 env:
-
   global:
     - ROLE_NAME: patroni
   matrix:
@@ -13,6 +13,7 @@ env:
 
 install:
   # Install test dependencies.
+  - pip install -U pip
   - pip3 install molecule yamllint ansible-lint docker
   - pip install -r requirements.txt
   
@@ -21,13 +22,14 @@ before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python get-pip.py
   - python3 get-pip.py
-  - python -m site
+  - pip install -U pip
   - cd ../
   - mv ansible-role-$ROLE_NAME yanehi.$ROLE_NAME
   - cd yanehi.$ROLE_NAME
 
 script:
   # Run tests.
+  - pip install -U pip
   - python -m site
   - pip --version
   - molecule test

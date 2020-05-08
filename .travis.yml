@@ -10,6 +10,8 @@ env:
 
 install:
   # Install test dependencies.
+  - pip install setuptools
+  - pip3 install setuptools
   - pip3 install molecule yamllint ansible-lint docker
   
 before_script:
@@ -17,6 +19,8 @@ before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python get-pip.py
   - python3 get-pip.py
+  - pip install setuptools
+  - pip3 install setuptools
   - pip install -U pip
   - pip install --upgrade pip
   - cd ../

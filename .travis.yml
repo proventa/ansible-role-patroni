@@ -7,14 +7,14 @@ env:
     - ROLE_NAME: patroni
   matrix:
     - MOLECULE_DISTRO: centos7
-before_script:
-  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  - python get-pip.py
   
 before_install:
   # upgrade pip
   - python3 -m pip install --upgrade pip
- 
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  - python get-pip.py
+  - which pip3
+
 install:
   # Install test dependencies.
   - pip3 install --upgrade pip

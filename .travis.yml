@@ -26,6 +26,8 @@ before_script:
 script:
   # Run tests.
   - pip --version
+  - /usr/bin/pip --version
+  - /usr/bin/pip3 --version
   - molecule test
 
 notifications:

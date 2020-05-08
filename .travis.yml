@@ -12,7 +12,7 @@ install:
   # Install test dependencies.
   - pip3 install --upgrade pip
   - pip3 install molecule yamllint ansible-lint docker
-  - pip install psycopg2
+  - pip install psycopg2 psycopg2-binary
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.

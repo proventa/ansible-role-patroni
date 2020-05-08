@@ -1,2 +1,2 @@
 ---
-- import_playbook: etcd-servers.yml
+- import_playbook: dbservers.yml

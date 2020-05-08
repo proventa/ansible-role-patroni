@@ -8,13 +8,13 @@ env:
   matrix:
     - MOLECULE_DISTRO: centos7
     
- before_install:
+# before_install:
   # upgrade pip
-  - python3 -m pip install --upgrade pip
+#  - python -m pip install --upgrade pip
  
 install:
   # Install test dependencies.
-  - pip3 install molecule yamllint ansible-lint docker
+  - pip install molecule yamllint ansible-lint docker
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.

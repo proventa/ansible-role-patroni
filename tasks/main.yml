@@ -13,4 +13,3 @@
   block:
     - import_tasks: patroni_install.yml
     - import_tasks: patroni_directories.yml
-    

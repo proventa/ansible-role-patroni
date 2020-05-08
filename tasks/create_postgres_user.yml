@@ -5,4 +5,3 @@
     password: "{{ pg_user_password }}"
     shell: /bin/bash
     append: yes
-    

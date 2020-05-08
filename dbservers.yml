@@ -2,4 +2,3 @@
 - hosts: dbservers
   roles:
     - ansible-role-patroni
-    

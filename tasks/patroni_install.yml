@@ -5,4 +5,3 @@
     - patroni
     - patroni[etcd]
    executable: /usr/bin/pip3
-   

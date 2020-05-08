@@ -25,4 +25,3 @@
     name: firewalld
     enabled: yes
     masked: no
-    

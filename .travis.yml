@@ -20,8 +20,6 @@ install:
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
-  - sudo python -m pip install --user --upgrade pip
-  - sudo python3 -m pip install --user --upgrade pip
   - cd ../
   - mv ansible-role-$ROLE_NAME yanehi.$ROLE_NAME
   - cd yanehi.$ROLE_NAME
@@ -34,6 +32,8 @@ script:
   - python3 get-pip.py
   - which pip3
   - which pip
+  - sudo python -m pip install --user --upgrade pip
+  - sudo python3 -m pip install --user --upgrade pip
   - pip --version
   - molecule test
 

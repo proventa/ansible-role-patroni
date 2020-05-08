@@ -3,4 +3,4 @@
   pip:
    name: "{{ patroni_python_packages }}"
    state: present
- #  executable: pip3
+   executable: pip

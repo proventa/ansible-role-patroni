@@ -25,6 +25,7 @@ before_script:
 
 script:
   # Run tests.
+  - python -m site
   - pip --version
   - molecule test
 

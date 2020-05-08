@@ -4,5 +4,3 @@
    name: "{{ patroni_python_packages }}"
    state: present
    executable: /usr/bin/pip3
-# extra_args: --disable-pip-version-check
-

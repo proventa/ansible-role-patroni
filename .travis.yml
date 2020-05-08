@@ -1,5 +1,9 @@
 ---
 language: python
+  - "3.4"
+  - "3.5"
+  - "3.6"      # current default Python on Travis CI
+  - "3.7"
 services: docker
 
 env:
@@ -8,13 +12,13 @@ env:
   matrix:
     - MOLECULE_DISTRO: centos7
     
-before_install:
-- sudo apt-get update
-- sudo apt-get install python3 firewalld python3-devel python3-pip
-
+ before_install:
+  # upgrade pip
+  - python3 -m pip install --upgrade pip
+ 
 install:
   # Install test dependencies.
-  - pip install molecule yamllint ansible-lint docker
+  - pip3 install molecule yamllint ansible-lint docker
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.

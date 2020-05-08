@@ -11,8 +11,8 @@ env:
 install:
   # Install test dependencies.
   - pip3 install molecule yamllint ansible-lint docker
-  - pip install psycopg2 psycopg2-binary urllib3>=1.19.1,!=1.21 boto PyYAML six>=1.7 kazoo>=1.3.1 python-etcd>=0.4.3,<0.5 python-dateutil psutil>=2.0.0 click>=4.1
-
+  - pip install -r requirements.txt
+  
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py

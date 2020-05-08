@@ -11,7 +11,7 @@ env:
 install:
   # Install test dependencies.
   - pip3 install molecule yamllint ansible-lint docker
-  
+
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
   # upgrade pip version to 20.1

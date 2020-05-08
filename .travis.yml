@@ -17,7 +17,7 @@ install:
 
 before_script:
   # Use actual Ansible Galaxy role name for the project directory.
-#  - sudo mkdir -p /usr/bin
+  - sudo mkdir -p /usr/bin
   - cd ../
   - mv ansible-role-$ROLE_NAME yanehi.$ROLE_NAME
   - cd yanehi.$ROLE_NAME
@@ -28,7 +28,7 @@ script:
   - python get-pip.py
   - python3 get-pip.py
   - which pip3
-#  - cp /home/travis/virtualenv/python3.6.7/bin/pip3 /usr/bin/pip3
+  - sudo cp /home/travis/virtualenv/python3.6.7/bin/pip3 /usr/bin/pip3
   - molecule test
 
 notifications:

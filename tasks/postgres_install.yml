@@ -1,7 +1,4 @@
 ---
-- name: disable postgresql module
-  command: yum module disable postgresql -y
-
 - name: Ensure PostgreSQL packages are installed
   yum:
     name: "{{ pg_packages }}"

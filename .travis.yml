@@ -17,13 +17,13 @@ before_script:
   # upgrade pip version to 20.1
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python get-pip.py
-  - pip --version
   - cd ../
   - mv ansible-role-$ROLE_NAME yanehi.$ROLE_NAME
   - cd yanehi.$ROLE_NAME
 
 script:
   # Run tests.
+  - pip --version
   - molecule test
 
 notifications:

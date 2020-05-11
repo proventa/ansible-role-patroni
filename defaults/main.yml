@@ -10,6 +10,7 @@ patroni_home: "/etc/patroni"
 patroni_log_dir: "/var/log/pgsql/{{ pg_major_version }}"
 pg_bin_path: "/usr/pgsql-{{ pg_major_version }}/bin"
 patroni_bin_path: /usr/local/bin/patroni
+pg_pass: /var/lib/pgsql/{{ pg_major_version }}
 
 # postgres user
 pg_user: postgres

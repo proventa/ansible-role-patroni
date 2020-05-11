@@ -1,0 +1,110 @@
+---
+- name: patroni service file
+  shell: |
+    cat <<EOF | sudo tee {{ patroni_home }}/patroni.yml
+    scope: {{ pg_patroni_scope }}
+    namespace: /{{ pg_patroni_namespace }}/
+    name: $(hostname)
+    restapi:
+      listen:$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):{{ patroni_port }}
+      connect_address: $(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):{{ patroni_port }}
+
+    etcd:
+      hosts: {{ etcd0_ip }}:{{ etcd_port }},{{ etcd1_ip }}:{{ etcd_port }},{{ etcd2_ip }}:{{ etcd_port }}
+
+    bootstrap:
+      dcs:
+        ttl: 30
+        loop_wait: 10
+        retry_timeout: 10
+        maximum_lag_on_failover: 1048576
+        postgresql:
+          use_pg_rewind: true
+          use_slots: true
+          parameters:
+            wal_level: hot_standby
+            hot_standby: "on"
+            wal_keep_segments: 8
+            max_wal_senders: 10
+            max_replication_slots: 10
+            wal_log_hints: "on"
+            archive_mode: "on"
+            archive_timeout: 1800s
+            archive_command: mkdir -p ../wal_archive && test ! -f ../wal_archive/%f && cp %p ../wal_archive/%f
+          recovery_conf:
+            restore_command: cp ../wal_archive/%f %p
+      initdb:
+        - auth-host: scram-sha-256
+        - auth-local: peer
+        - locale: en_US.UTF-8
+        - encoding: UTF8
+        - data-checksums
+
+      pg_hba:  # Add following lines to pg_hba.conf after running 'initdb'
+      #- host all all 0.0.0.0/0 gss include_realm=0
+        - local   all    all    peer
+      # IPv4 local connections:
+        - host    all    all    0.0.0.0/0    scram-sha-256
+        - host    all    all    127.0.0.1/32     scram-sha-256
+        - host    all    all    192.168.56.0/24    scram-sha-256
+      # IPv6 local connections:
+        - host    all    all    ::1/128    scram-sha-256
+      # Allow replication connections from localhost, by a user with the
+      # replication privilege.
+        - local    replication    all    peer
+        - host     replication    replicator    127.0.0.1/32    scram-sha-256
+        - host     replication    replicator    ::1/128    scram-sha-256
+        - host     replication    replicator    192.168.56.0/24    scram-sha-256
+
+      users:
+        admin:
+          password: admin
+          options:
+            - createrole
+            - createdb
+
+    postgresql:
+      listen: $(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):{{ pg_port }}
+      connect_address: $(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):{{ pg_port }}
+      data_dir: {{ patroni_data_dir }}
+      bin_dir: {{ pg_bin_path }}
+      config_dir: {{ patroni_home }}
+      pgpass: {{ pg_pass }}/.pgpass
+      authentication:
+        replication:
+          username: replicator
+          password: rep-pass
+        superuser:
+          username: {{ pg_user }}
+          password: {{ pg_user_password }}
+        rewind:  # Has no effect on postgres 10 and lower
+          username: rewind_user
+          password: rewind_password
+      parameters:
+        unix_socket_directories: '.'
+
+    watchdog:
+      mode: automatic # Allowed values: off, automatic, required
+      device: /dev/watchdog
+      safety_margin: 5
+
+    tags:
+      nofailover: false
+      noloadbalance: false
+      clonefrom: false
+      nosync: false
+
+    log:
+      dir: {{ patroni_log_dir }}
+      level: INFO
+      file_num: 3
+
+    EOF
+  args:
+      executable: /bin/bash
+
+- name: patroni YAML rights
+  file:
+      path: "{{ patroni_home }}/patroni.yml"
+      owner: "{{ pg_user }}"
+      group: "{{ pg_user }}"

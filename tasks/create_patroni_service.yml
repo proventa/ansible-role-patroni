@@ -1,0 +1,26 @@
+---
+- name: patroni service file
+  shell: |
+    cat <<EOF | sudo tee /etc/systemd/system/patroni.service
+    [Unit]
+    Description=Runners to orchestrate a high-availability PostgreSQL
+    After=syslog.target network.target
+
+    [Service]
+    Type=simple
+    User={{ pg_user }}
+    Group={{ pg_user }}
+    ExecStart={{ patroni_bin_path }} {{ patroni_home }}/patroni.yml
+    KillMode=process
+    TimeoutSec=30
+    Restart=no
+
+    [Install]
+    WantedBy=multi-user.targ
+    EOF
+  args:
+      executable: /bin/bash
+
+- name: systemd to reread configs
+  systemd:
+      daemon_reload: yes

@@ -1,7 +1,0 @@
----
-- name: Add the postgres user 'postgres'
-  user:
-    name: "{{ pg_user }}"
-    password: "{{ pg_user_password }}"
-    shell: /bin/bash
-    append: yes

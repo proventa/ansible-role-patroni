@@ -4,11 +4,6 @@
     name: "*"
     state: latest
 
-- name: install epel repo
-  yum:
-    name: epel-release
-    state: present
-
 - name: install required packages
   yum:
     name: "{{ os_python_packages }}"

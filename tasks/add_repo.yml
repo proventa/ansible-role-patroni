@@ -1,0 +1,13 @@
+# https://github.com/geerlingguy/ansible-role-repo-epel
+- name: Check if EPEL repo is already configured.
+  stat:
+    path: /etc/yum.repos.d/epel.repo
+  register: epel_repofile_result
+
+- name: install epel repo
+  command: yum install epel-release -y
+
+- name: Add Yum repository
+  yum:
+    name: "{{ pg_repo_url }}"
+    state: present

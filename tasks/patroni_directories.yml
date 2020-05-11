@@ -28,15 +28,3 @@
     group: "{{ pg_user }}"
     state: directory
     mode: 0700
-
-- name: create patroni YAML
-  copy:
-    src: ./patroni.yml
-    dest: "{{ patroni_home }}/patroni.yml"
-    owner: "{{ pg_user }}"
-    group: "{{ pg_user }}"
-
-- name: create patroni service
-  copy:
-    src: ./patroni.service
-    dest: /etc/systemd/system/patroni.service

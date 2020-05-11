@@ -1,6 +1,7 @@
 ---
 # Set major version of PostgreSQL
 pg_major_version: 12
+pg_repo_url: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
 
 # directories of
 patroni_data_dir: "/data/patroni"

@@ -1,11 +1,8 @@
-# https://github.com/geerlingguy/ansible-role-repo-epel
+---
 - name: Check if EPEL repo is already configured.
   stat:
     path: /etc/yum.repos.d/epel.repo
   register: epel_repofile_result
-
-- name: install epel repo
-  command: yum install epel-release -y
 
 - name: Exclude CentOS PostgreSQL packages
   ini_file:

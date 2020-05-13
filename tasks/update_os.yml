@@ -10,6 +10,9 @@
     state: present
 #  notify: start firewalld
 
+- name: install epel repo
+  command: yum install epel-release -y
+
 - name: start service firewalld
   systemd:
     state: started
